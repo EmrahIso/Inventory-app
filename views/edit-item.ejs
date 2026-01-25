@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Edit Item</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Edit Item</h1>
+      <form method="POST" action="/edit-item/<%= item.id %>" class="form">
+        <label for="name">Item Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value="<%= item.name %>"
+          required
+        />
+
+        <label for="brand">Brand:</label>
+        <input type="text" id="brand" name="brand" value="<%= item.brand %>" />
+
+        <label for="price">Price:</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          step="0.01"
+          value="<%= item.price %>"
+          required
+        />
+
+        <label for="stock">Stock:</label>
+        <input
+          type="number"
+          id="stock"
+          name="stock"
+          value="<%= item.stock %>"
+          required
+        />
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description">
+<%= item.description %></textarea
+        >
+
+        <button type="submit">Update Item</button>
+        <a href="/item/<%= item.id %>">Cancel</a>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <h1><%= category.name %> Details</h1>
+      <p><strong>Description:</strong> <%= category.description %></p>
+
+      <div class="actions">
+        <a href="/" class="btn">Back to Home</a>
+        <a href="/edit/category/<%= category.id %>" class="edit-btn">Edit Category</a>
+        <a href="/delete/category/<%= category.id %>" class="btn delete-btn">Delete Category</a>
+        <a href="/new/item?category_id=<%= category.id %>" class="add-btn">Add New Item</a>
+      </div>
+
+      <h2>Items in this Category</h2>
+      <table class="items-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% category.items.forEach(item => { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.brand %></td>
+              <td>$<%= item.price %></td>
+              <td><%= item.stock %></td>
+              <td><%= item.description %></td>
+              <td>
+                <a href="/item/<%= item.id %>" class="details-btn">Details</a>
+                <a href="/edit/item/<%= item.id %>" class="edit-btn">Edit</a>
+                <a href="/delete/item/<%= item.id %>" class="btn delete-btn">Delete</a>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <h1><%= item.name %> Details</h1>
+      <p><strong>Brand:</strong> <%= item.brand %></p>
+      <p><strong>Price:</strong> $<%= item.price %></p>
+      <p><strong>Stock:</strong> <%= item.stock %></p>
+      <p><strong>Description:</strong> <%= item.description %></p>
+      <p><strong>Created At:</strong> <%= item.created_at %></p>
+
+      <div class="actions">
+        <a href="/" class="btn">Back to Home</a>
+        <a href="/edit/item/<%= item.id %>" class="edit-btn">Edit Item</a>
+        <a href="/delete/item/<%= item.id %>" class="btn delete-btn"
+          >Delete Item</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

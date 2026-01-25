@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Tech Shop Inventory App</h1>
+
+      <div class="filters">
+        <form method="GET" action="/">
+          <label for="category">Filter by Category:</label>
+          <select name="category_id" id="category">
+            <option value="all">All Categories</option>
+            <% categories.forEach(cat => { %>
+              <option value="<%= cat.id %>" <%= (Number(queryParams.category_id) === cat.id ? 'selected' : '') %>><%= cat.name %></option>
+            <% }); %>
+          </select>
+
+          <button type="submit">Filter</button>
+        </form>
+        <a href="/new/category" class="add-btn">Add New Category</a>
+      </div>
+
+      <div class="categories">
+        <% data.forEach(cat => { %>
+          <%- include('partials/category-display', { category: cat, items: cat.items }) %>
+        <% }); %>
+      </div>
+    </div>
+  </body>
+</html>
