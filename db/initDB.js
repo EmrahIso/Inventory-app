@@ -54,15 +54,15 @@ INSERT INTO items (name, brand, price, stock, description, category_id) VALUES
 async function initDB() {
   const client = new Client({
     connectionString: process.env.DATABASE_URL,
-    ssl:
-      process.env.NODE_ENV === 'production'
-        ? { rejectUnauthorized: false }
-        : false,
+    ssl: { rejectUnauthorized: false },
   });
 
   try {
     await client.connect();
     console.log('Connected to the database successfully.');
+
+    await client.query(INIT_SQL);
+    console.log('Database initialized successfully.');
 
     const { rows } = await client.query(`SELECT COUNT(*) FROM categories`);
 
@@ -71,9 +71,6 @@ async function initDB() {
       await client.end();
       return;
     }
-
-    await client.query(INIT_SQL);
-    console.log('Database initialized successfully.');
 
     await client.query(SQL_DEFAULT_DATA);
     console.log('Default data inserted successfully.');
