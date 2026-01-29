@@ -4,14 +4,6 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl:
-    process.env.NODE_ENV === 'production'
-      ? { rejectUnauthorized: false }
-      : false,
-});
-
 const INIT_SQL = `
 CREATE TABLE IF NOT EXISTS categories (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -60,9 +52,25 @@ INSERT INTO items (name, brand, price, stock, description, category_id) VALUES
 `;
 
 async function initDB() {
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl:
+      process.env.NODE_ENV === 'production'
+        ? { rejectUnauthorized: false }
+        : false,
+  });
+
   try {
     await client.connect();
     console.log('Connected to the database successfully.');
+
+    const { rows } = await client.query(`SELECT COUNT(*) FROM categories`);
+
+    if (rows.length > 0 && rows[0].count > 0) {
+      console.log('ℹ️ DB already initialized');
+      await client.end();
+      return;
+    }
 
     await client.query(INIT_SQL);
     console.log('Database initialized successfully.');
@@ -76,4 +84,4 @@ async function initDB() {
   }
 }
 
-initDB();
+module.exports = initDB;

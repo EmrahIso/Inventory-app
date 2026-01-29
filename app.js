@@ -1,6 +1,8 @@
 const path = require('node:path');
 const express = require('express');
 
+const initDB = require('./db/initDB');
+
 const indexRouter = require('./routes/indexRouter');
 const addNewRouter = require('./routes/addNewRouter');
 const editRouter = require('./routes/editRouter');
@@ -36,4 +38,15 @@ app.use((err, req, res, next) => {
   res.status(500).render('500', { title: 'Server Error' });
 });
 
-app.listen(PORT, () => {});
+(async () => {
+  try {
+    await initDB();
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error('❌ DB initialization failed:', err);
+    process.exit(1);
+  }
+})();
