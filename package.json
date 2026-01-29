@@ -1,0 +1,29 @@
+{
+  "name": "inventory-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "NODE_ENV=development node --watch app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmrahIso/Inventory-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/EmrahIso/Inventory-app/issues"
+  },
+  "homepage": "https://github.com/EmrahIso/Inventory-app#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "helmet": "^8.1.0",
+    "pg": "^8.17.2"
+  }
+}
